@@ -1,0 +1,52 @@
+Sardine,10,6,3,1
+Angelfish,20,6,2.5,1
+Red Snapper,25,6,2,1
+Salmon,30,4,2,1
+Anglerfish,50,4,1.5,1
+Sea Urchin,10,6,3,1
+Blue Lobster,15,5.5,3,1
+Saltwater Snail,10,6,3,1
+Parrot Fish,15,5.5,3,1
+Mackerel,20,6,2.5,1
+Clownfish,25,6,2,1
+Plaice,30,4,2,1
+Silver Eel,40,4,2,0.9
+Sea Horse,25,6,2,1
+Lion Fish,50,4,1.5,1
+Cowfish,40,4,2,0.9
+Shrimp,40,4,2,0.9
+Squid,50,4,1.5,1
+Dumbo Octopus,80,3.5,2,0.6
+Tuna,20,6,2.5,1
+Banded Butterflyfish,25,6,2,1
+Atlantic Bass,30,4,2,1
+Blue Tang,25,6,2,1
+Pollock,30,4,2,1
+Ballan Wrasse,35,4.5,2,0.9
+Weaver,40,4,2,0.9
+Bream,40,4,2,0.9
+Pufferfish,50,4,1.5,1
+Crab,40,4,2,0.9
+Lobster,50,4,1.5,1
+Sea Angel,80,3.5,2,0.6
+Turtle,100,3,1,0.5
+Cod,10,6,3,1
+Dab,10,6,3,1
+Flounder,20,6,2.5,1
+Whiting,20,6,2.5,1
+Halibut,30,4,2,1
+Herring,30,4,2,1
+Stingray,100,3,1,0.5
+Octopus,100,3,1,0.5
+Pink Fantasia,50,4,1.5,1
+Sea Spider,40,4,2,0.9
+Wolfish,25,6,2,1
+Bonefish,20,6,2.5,1
+Cobia,10,6,3,1
+Black Drum,30,4,2,1
+Blob Fish,50,4,1.5,1
+Pompano,40,4,2,0.9
+Jellyfish,100,3,1,0.5
+Sea Cucumber,20,6,2.5,1
+Christmas Tree Worm,10,6,3,1
+Sea Pen,15,5.5,3,1

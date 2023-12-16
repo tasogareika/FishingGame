@@ -6,11 +6,14 @@ using UnityEngine.UI;
 public class FishingMinigame : MonoBehaviour
 {
     [SerializeField] private SensorConnect bluetoothController;
+    public static FishingMinigame singleton;
     private FishHandler fishHandler;
     [SerializeField] private Transform topPivot, bottomPivot, fishTransform, hookTransform, progressBar;
     private float fishPos, fishDestination, fishTimer, fishSpeed, smoothMotion, timeMultiplactor, waitTimer,
-                  hookPos, hookSize, hookPower, hookProgress, hookPullVelocity, hookPullPower, hookGravityPower, hookDegredationPower,
-                  horizontalRate;
+                  hookPos, hookSize, hookPower, hookProgress, hookPullVelocity, hookPullPower, hookGravityPower,
+                  hookDegredationPower, horizontalRate, originalHookPower;
+    private string hookFishName;
+    private int playerGold, goldToAdd;
     [SerializeField] SpriteRenderer hookSprite, fishSprite;
     [SerializeField] private List<GameObject> backgroundLayers;
     [SerializeField] private Animator fishermanAnimator;
@@ -23,7 +26,12 @@ public class FishingMinigame : MonoBehaviour
     [SerializeField] private Button fishBtn;
     [SerializeField] private Image promptImg;
     [SerializeField] private Sprite woodCross, woodCheck;
-    [SerializeField] private TextMeshProUGUI promptText;
+    [SerializeField] private TextMeshProUGUI promptText, playerGoldDisplay;
+
+    private void Awake()
+    {
+        singleton = this;
+    }
 
     private void Start()
     {
@@ -31,11 +39,14 @@ public class FishingMinigame : MonoBehaviour
         timeMultiplactor = 6f; //time between fish movement (more = fish will stay in one place longer)
         smoothMotion = 3f; //time for how long fish takes to move
         hookSize = 0.3f; //size of hookarea
-        hookPower = 0.1f; //how fast progress bar fills
+        originalHookPower = 0.1f;
+        hookPower = originalHookPower; //how fast progress bar fills
         hookPullPower = 0.01f; //speed of hookarea movement
         hookGravityPower = 0.001f; //hookarea going downwards when there is no force
         hookDegredationPower = 0.1f; //progress bar degredation
         horizontalRate = 0.005f;
+        playerGold = 0;
+        goldToAdd = 0;
         isPaused = true;
         isWaiting = true;
         waitTimer = Random.Range(0.5f, 3f);
@@ -44,6 +55,7 @@ public class FishingMinigame : MonoBehaviour
         fishBtn.gameObject.SetActive(false);
         UIPanel.SetActive(false);
         fishingPanel.SetActive(false);
+        playerGoldDisplay.text = playerGold.ToString();
         resizeHook();
     }
 
@@ -59,6 +71,7 @@ public class FishingMinigame : MonoBehaviour
             {
                 isWaiting = false;
                 promptImg.sprite = woodCheck;
+                fishSprite.sprite = fishHandler.getFishSprite();
                 promptText.text = "Fish!!";
                 fishBtn.gameObject.SetActive(true);
             }
@@ -74,12 +87,22 @@ public class FishingMinigame : MonoBehaviour
         backgroundScroll();
     }
 
+    public void setHookStats(string fishName, int fishValue, float fishTime, float motionValue, float fishPower)
+    {
+        hookFishName = fishName;
+        timeMultiplactor = fishTime;
+        smoothMotion = motionValue;
+        hookPower = originalHookPower * fishPower;
+        goldToAdd = fishValue;
+
+        Debug.Log(fishName + "," + fishTime + "," + motionValue + "," + hookPower);
+    }
+
     public void startFishing()
     {
         fishBtn.gameObject.SetActive(false);
         fishingPanel.SetActive(true);
         fishermanAnimator.Play("FishHook");
-        fishSprite.sprite = fishHandler.getFishSprite();
         isPaused = false;
     }
 
@@ -147,6 +170,8 @@ public class FishingMinigame : MonoBehaviour
         {
             //fish caught
             isPaused = true;
+            playerGold += goldToAdd;
+            playerGoldDisplay.text = playerGold.ToString();
             fishermanAnimator.Play("FishCatch");
             UIPanel.SetActive(true);
         }
